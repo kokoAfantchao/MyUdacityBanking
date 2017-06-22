@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/step_master_detail_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    tools:context=".activities.StepActivity">
+
+    <fragment
+        android:id="@+id/step_list_fragment"
+        android:name="com.android.mig.bakingapp.fragments.StepListFragment"
+        android:layout_width="@dimen/zero_dimension"
+        android:layout_height="match_parent"
+        android:layout_weight="@integer/step_list_weight"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <FrameLayout
+        android:id="@+id/step_detail_container"
+        android:layout_width="@dimen/zero_dimension"
+        android:layout_height="match_parent"
+        android:layout_weight="@integer/step_detail_weight"/>
+
+</LinearLayout>
