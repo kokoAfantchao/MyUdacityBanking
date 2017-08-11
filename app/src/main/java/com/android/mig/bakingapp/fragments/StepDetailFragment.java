@@ -60,7 +60,7 @@ public class StepDetailFragment extends Fragment {
         mStepDetailPagerAdapter.setStepDetailAdapter(mStepArrayList);
 
         // Set up the ViewPager with the sections adapter and displays the step that was selected
-        mViewPager = (ViewPager) rootView.findViewById(R.id.viewpager_step_detail);
+        mViewPager = (ViewPager)rootView.findViewById(R.id.viewpager_step_detail);
         mViewPager.setAdapter(mStepDetailPagerAdapter);
         mViewPager.setCurrentItem(mCurrentViewPagerPosition);
 
@@ -169,7 +169,6 @@ public class StepDetailFragment extends Fragment {
             LoadControl loadControl = new DefaultLoadControl();
             mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
             mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
-
             String userAgent = Util.getUserAgent(getActivity(), "BakingAppExoPlayer");
             MediaSource mediaSource = new ExtractorMediaSource(videoUri, new DefaultDataSourceFactory(
                     getActivity(), userAgent), new DefaultExtractorsFactory(), null, null);

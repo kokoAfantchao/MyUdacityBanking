@@ -36,7 +36,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         String ingredient = mIngredientArray.get(position).getIngredient();
         double qty = mIngredientArray.get(position).getIngredientQuantity();
         String measure = mIngredientArray.get(position).getIngredientMeasure();
-
         holder.mTextViewIngredient.setText(ingredient);
         holder.mTextViewQuantityMeasure.setText(String.valueOf(qty) + " " + measure);
         holder.mTextViewIngredient.setBackgroundResource(position % 2 == 0 ? R.color.green100 : R.color.green50);

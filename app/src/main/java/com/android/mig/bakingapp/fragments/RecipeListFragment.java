@@ -117,6 +117,9 @@ public class RecipeListFragment extends Fragment
 
             @Override
             protected void onStartLoading() {
+                if(recipesArray!=null )
+                    deliverResult(recipesArray);
+                else
                 forceLoad();
             }
 
