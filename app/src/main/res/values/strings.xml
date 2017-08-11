@@ -7,6 +7,9 @@
     <string name="last_viewed_ingredients">Last viewed ingredients</string>
     <string name="servings_text">Servings:\u0020</string>
 
+    <string name="title_activity_fullscreen_video">FullscreenVideoActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 
 </resources>

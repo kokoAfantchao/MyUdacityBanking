@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:support-v4:25.3.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile 'com.android.support:appcompat-v7:25.3.1'
@@ -39,7 +40,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude module: 'recyclerview-v7'
     }
-   //   My added dependency
+    //   My added dependency
     annotationProcessor 'net.simonvt.schematic:schematic-compiler:0.7.0'
     compile 'net.simonvt.schematic:schematic:0.7.0'
 }

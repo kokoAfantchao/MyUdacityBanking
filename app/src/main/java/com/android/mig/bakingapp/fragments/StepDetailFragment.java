@@ -6,13 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.mig.bakingapp.R;
+import com.android.mig.bakingapp.activities.FullscreenVideoActivity;
 import com.android.mig.bakingapp.models.Step;
 import com.android.mig.bakingapp.adapters.StepDetailPagerAdapter;
 import com.bumptech.glide.Glide;
@@ -98,6 +102,7 @@ public class StepDetailFragment extends Fragment {
         private static final String ARG_STEP_VIDEO_URL = "videoURL";
         private static final String ARG_STEP_THUMBNAIL_URL = "thumbnailURL";
         private static final String ARG_STEP_NUMBER = "step_number";
+        private static final String TAG = ViewPagerSubFragment.class.getSimpleName();
         private SimpleExoPlayer mSimpleExoPlayer;
         private SimpleExoPlayerView mSimpleExoPlayerView;
 
@@ -113,6 +118,14 @@ public class StepDetailFragment extends Fragment {
             textView.setText(getArguments().getString(ARG_STEP_DESCRIPTION));
 
             mSimpleExoPlayerView = (SimpleExoPlayerView) subView.findViewById(R.id.video_step_detail_exoplayer_view);
+                ImageButton buttonFullScreen =(ImageButton) subView.findViewById(R.id.exo_full_screen);
+                buttonFullScreen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intentFullScreen = new Intent(getContext(), FullscreenVideoActivity.class);
+                        startActivity(intentFullScreen);
+                    }
+                });
 
             // this tries to set the player with a video, but there isn't uses an image
             if ("".equals(videoURL) || videoURL == null) {
@@ -178,5 +191,7 @@ public class StepDetailFragment extends Fragment {
                 mSimpleExoPlayer.setPlayWhenReady(true);
             }
         }
+
+
     }
 }
