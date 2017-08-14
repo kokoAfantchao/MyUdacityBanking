@@ -11,7 +11,8 @@
         android:textSize="@dimen/ingredient_text_size"
         android:paddingLeft="@dimen/recycler_view_horizontal_padding"
         android:paddingRight="@dimen/recycler_view_horizontal_padding"
-        android:paddingTop="@dimen/recycler_view_vertical_padding"/>
+        android:paddingTop="@dimen/recycler_view_vertical_padding"
+        android:textColor="@color/primary_text"/>
 
     <TextView
         android:id="@+id/text_view_quantity_measure"
@@ -20,6 +21,7 @@
         android:textSize="@dimen/quantity_measure_text_size"
         android:paddingLeft="@dimen/recycler_view_horizontal_padding"
         android:paddingRight="@dimen/recycler_view_horizontal_padding"
-        android:paddingBottom="@dimen/recycler_view_vertical_padding" />
+        android:paddingBottom="@dimen/recycler_view_horizontal_padding"
+        android:textColor="@color/secondary_text"/>
 
 </LinearLayout>

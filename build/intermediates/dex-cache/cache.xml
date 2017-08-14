@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.android/build-cache/154ee1cfbfd576fd5f33253ef9e02fd4a9a14e60/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="05c5d05d2b435c4e41bc31e24804ff4284616653">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e3536c45d6f41b9e0ed9ff9866d6ac322f26a7f7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/disklrucache/4.0.0-RC0/46d23cdc19155c5f0d47ece99ca1c421346c1509/disklrucache-4.0.0-RC0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="46d23cdc19155c5f0d47ece99ca1c421346c1509">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/disklrucache-4.0.0-RC0_aabf1ee613bd16bf534068c0a06e97145ed24a96/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4266fdd3073cf52e72b9b01ecf662fefa7d5e7b6">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c7526da6f2f6c34f40a2206dce4b593b7aeeb30a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.android/build-cache/5a5a545bda9081992141b64a3dbba7ae0be12c8c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_82026914a32f162987c22586e1b495f1ff410464/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/4.0.0-RC0/eb86cd1d96acc30dcebf338abaf2c62ca28bf355/glide-4.0.0-RC0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="eb86cd1d96acc30dcebf338abaf2c62ca28bf355">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/glide-4.0.0-RC0_def08fafaab35a125cf14bc6b7a4c33983f9b3ae/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_551405c99f14db20cfd4ca10bb51c41dbf5ff40a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.android/build-cache/f58005c41d078c3f5e709144e824bf9c92f643a1/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a817dfe9969a9c583c29a60694c487d0bc900e14/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.android/build-cache/4ce2391468a54eb2c4100978e40b3a671b5ce6ae/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5522b55cf8c5495a091c730a50309cd8edc574ec/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.android/build-cache/8e4352e8d0726d43dcf1e8b32d152833bda122d9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="31ead391552fc8d93a7b87b0f15e83755b908904">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e91b841adc96b80cf7472a34ca643c3eea99d97c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/gifdecoder/4.0.0-RC0/c64f5d4805b528de434a5a8bb9a8091b6f9cd1a7/gifdecoder-4.0.0-RC0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c64f5d4805b528de434a5a8bb9a8091b6f9cd1a7">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/gifdecoder-4.0.0-RC0_9c929f462b77c2c9b35b4fa8bb926e5c127491fc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/net.simonvt.schematic/schematic-annotations/0.7.0/28b029ad72400e33bef3429c81c26a517f8dea86/schematic-annotations-0.7.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="28b029ad72400e33bef3429c81c26a517f8dea86">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/schematic-annotations-0.7.0_dab6769cf716af2dfb60c93a2715353144664f11/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/annotations/4.0.0-RC0/d5dd0afc50069b7fa0fc12ac85f91efa8df4db67/annotations-4.0.0-RC0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d5dd0afc50069b7fa0fc12ac85f91efa8df4db67">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/annotations-4.0.0-RC0_0ffec5cf5dca7a730872d09d6cfa4b5c24c0d518/classes.dex" />
+    </item>
+
+</items>

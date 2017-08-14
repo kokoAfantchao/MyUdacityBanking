@@ -2,7 +2,7 @@
 <resources>
     <integer name="sw600dp">600</integer>
     <integer name="portrait_tablet_recipes_list_num_columns">2</integer>
-    <integer name="landscape_tablet_recipes_list_num_columns">4</integer>
+    <integer name="landscape_tablet_recipes_list_num_columns">3</integer>
     <integer name="landscape_handset_recipes_list_num_columns">2</integer>
     <integer name="step_list_weight">1</integer>
     <integer name="step_detail_weight">2</integer>

@@ -27,4 +27,12 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+    <style name="default_button_theme">
+        <item name="android:textColor">@color/icons</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:padding">@dimen/action_padding</item>
+        <item name="android:layout_margin">@dimen/action_margin</item>
+    </style>
+
+
 </resources>
