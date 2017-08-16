@@ -11,6 +11,9 @@ import com.android.mig.bakingapp.models.Step;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapterViewHolder>{
 
     OnClickHandler mOnClickHandler;
@@ -49,11 +52,11 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
 
     public class StepsAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView mTextViewStep;
+        @BindView(R.id.text_view_step) TextView mTextViewStep;
 
         public StepsAdapterViewHolder(View itemView) {
             super(itemView);
-            mTextViewStep = (TextView) itemView.findViewById(R.id.text_view_step);
+            ButterKnife.bind(this,itemView);
             itemView.setOnClickListener(this);
         }
 

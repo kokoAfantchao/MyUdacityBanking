@@ -3,6 +3,7 @@ package com.android.mig.bakingapp.fragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -34,10 +35,17 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class StepDetailFragment extends Fragment {
 
     private static final int STARTING_POSITION = 0;
+    private static final String TABLE_FLAG = "TABLE_FLAG";
+    private static final String INITIAL_POSITION = "INITIAL_POSITION";
+    private static final String STEP_LIST = "STEP_LIST";
     private boolean isTabletFlag = false;                 // true if device is a tablet, false if it's a handset
     public ViewPager mViewPager;
     private static int mCurrentViewPagerPosition;
@@ -48,11 +56,26 @@ public class StepDetailFragment extends Fragment {
 
     }
 
+    public static  StepDetailFragment newtInstance(ArrayList<Step> steps,int initialPosition, Boolean tableFlag ){
+        StepDetailFragment f = new StepDetailFragment();
+        Bundle args = new Bundle();
+        args.putParcelableArrayList(STEP_LIST,steps);
+        args.putInt(INITIAL_POSITION, initialPosition);
+        args.putBoolean(TABLE_FLAG,tableFlag);
+        f.setArguments(args);
+        return f ;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_step_detail, container, false);
-
+        Bundle arguments = getArguments();
+        ArrayList<Step> stepArrayList = arguments.getParcelableArrayList(STEP_LIST);
+        setStepsData(stepArrayList,
+                 arguments.getInt(INITIAL_POSITION),
+                 arguments.getBoolean(TABLE_FLAG)
+                 );
         if (!isTabletFlag){
             // retrieves the array of steps that was passed from StepListFragment
             mStepArrayList = getActivity().getIntent().getParcelableArrayListExtra(Intent.EXTRA_TEXT);
@@ -104,33 +127,34 @@ public class StepDetailFragment extends Fragment {
         private static final String ARG_STEP_NUMBER = "step_number";
         private static final String TAG = ViewPagerSubFragment.class.getSimpleName();
         private SimpleExoPlayer mSimpleExoPlayer;
+        @BindView(R.id.video_step_detail_exoplayer_view)
         private SimpleExoPlayerView mSimpleExoPlayerView;
+        @BindView(R.id.text_view_step_description)
+        private TextView textView;
+        @BindView(R.id.exo_full_screen)
+        private Button buttonFullScreen;
+        @BindView(R.id.thumbnail_step_detail_image_view)
+        private ImageView thumbnailImageView;
 
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View subView = inflater.inflate(R.layout.fragment_step_detail_slide_page, container, false);
+            ButterKnife.bind(this,subView);
             String videoURL = getArguments().getString(ARG_STEP_VIDEO_URL);
             String thumbnailURL = getArguments().getString(ARG_STEP_THUMBNAIL_URL);
             int stepNumber = getArguments().getInt(ARG_STEP_NUMBER);
-
-            TextView textView = (TextView) subView.findViewById(R.id.text_view_step_description);
             textView.setText(getArguments().getString(ARG_STEP_DESCRIPTION));
-
-            mSimpleExoPlayerView = (SimpleExoPlayerView) subView.findViewById(R.id.video_step_detail_exoplayer_view);
-                ImageButton buttonFullScreen =(ImageButton) subView.findViewById(R.id.exo_full_screen);
-                buttonFullScreen.setOnClickListener(new View.OnClickListener() {
+            buttonFullScreen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intentFullScreen = new Intent(getContext(), FullscreenVideoActivity.class);
                         startActivity(intentFullScreen);
                     }
                 });
-
             // this tries to set the player with a video, but there isn't uses an image
             if ("".equals(videoURL) || videoURL == null) {
                 mSimpleExoPlayerView.setVisibility(View.INVISIBLE);
-                ImageView thumbnailImageView = (ImageView) subView.findViewById(R.id.thumbnail_step_detail_image_view);
                 thumbnailImageView.setVisibility(View.VISIBLE);
                 if ("".equals(thumbnailURL) || thumbnailURL == null) {
                     return subView;

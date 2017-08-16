@@ -3,6 +3,51 @@
 
     <item
         is-multidex="true"
+        jar="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4266fdd3073cf52e72b9b01ecf662fefa7d5e7b6">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c7526da6f2f6c34f40a2206dce4b593b7aeeb30a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.8.1/bc373fb6bc7bca3035041b924f158fd2b946ee8d/butterknife-annotations-8.8.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bc373fb6bc7bca3035041b924f158fd2b946ee8d">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/butterknife-annotations-8.8.1_608cb8bcd9da2ae60bf359b7a741269e73e6ac6f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.android/build-cache/4ce2391468a54eb2c4100978e40b3a671b5ce6ae/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5522b55cf8c5495a091c730a50309cd8edc574ec/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/net.simonvt.schematic/schematic-annotations/0.7.0/28b029ad72400e33bef3429c81c26a517f8dea86/schematic-annotations-0.7.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="28b029ad72400e33bef3429c81c26a517f8dea86">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/schematic-annotations-0.7.0_dab6769cf716af2dfb60c93a2715353144664f11/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/annotations/4.0.0-RC0/d5dd0afc50069b7fa0fc12ac85f91efa8df4db67/annotations-4.0.0-RC0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d5dd0afc50069b7fa0fc12ac85f91efa8df4db67">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/annotations-4.0.0-RC0_0ffec5cf5dca7a730872d09d6cfa4b5c24c0d518/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/nestorkokoafantchao/.android/build-cache/154ee1cfbfd576fd5f33253ef9e02fd4a9a14e60/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -12,21 +57,21 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/nestorkokoafantchao/.android/build-cache/e1f0265d9a262800a204e257e031f4a39cc8d79d/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6a2bcb61342d09fe9acf55c9daf63961c8866cc0">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c97091aa433857889ed227336d1c04ef81fba90b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/disklrucache/4.0.0-RC0/46d23cdc19155c5f0d47ece99ca1c421346c1509/disklrucache-4.0.0-RC0.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="46d23cdc19155c5f0d47ece99ca1c421346c1509">
         <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/disklrucache-4.0.0-RC0_aabf1ee613bd16bf534068c0a06e97145ed24a96/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4266fdd3073cf52e72b9b01ecf662fefa7d5e7b6">
-        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c7526da6f2f6c34f40a2206dce4b593b7aeeb30a/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -66,12 +111,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/nestorkokoafantchao/.android/build-cache/4ce2391468a54eb2c4100978e40b3a671b5ce6ae/output/jars/classes.jar"
+        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="95519720620b553f63afc789beba9ad582807f7c">
-        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5522b55cf8c5495a091c730a50309cd8edc574ec/classes.dex" />
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.5.2_091a01c7612477a4bbe1bd10812e23608621bd1e/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -90,24 +135,6 @@
         revision="25.0.2"
         sha1="c64f5d4805b528de434a5a8bb9a8091b6f9cd1a7">
         <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/gifdecoder-4.0.0-RC0_9c929f462b77c2c9b35b4fa8bb926e5c127491fc/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/net.simonvt.schematic/schematic-annotations/0.7.0/28b029ad72400e33bef3429c81c26a517f8dea86/schematic-annotations-0.7.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="28b029ad72400e33bef3429c81c26a517f8dea86">
-        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/schematic-annotations-0.7.0_dab6769cf716af2dfb60c93a2715353144664f11/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/nestorkokoafantchao/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/annotations/4.0.0-RC0/d5dd0afc50069b7fa0fc12ac85f91efa8df4db67/annotations-4.0.0-RC0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d5dd0afc50069b7fa0fc12ac85f91efa8df4db67">
-        <dex dex="/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/transforms/dex/debug/folders/1000/10/annotations-4.0.0-RC0_0ffec5cf5dca7a730872d09d6cfa4b5c24c0d518/classes.dex" />
     </item>
 
 </items>
