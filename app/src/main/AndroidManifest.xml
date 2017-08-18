@@ -61,6 +61,7 @@
         <activity
             android:name=".activities.FullscreenVideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_fullscreen_video"
             android:theme="@style/FullscreenTheme"></activity>
     </application>

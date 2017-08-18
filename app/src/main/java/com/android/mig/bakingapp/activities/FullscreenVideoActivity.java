@@ -1,14 +1,31 @@
 package com.android.mig.bakingapp.activities;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.android.mig.bakingapp.R;
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.LoadControl;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -84,36 +101,57 @@ public class FullscreenVideoActivity extends AppCompatActivity {
             return false;
         }
     };
+    public static final  String   CURRENT_POSITION="CURRENT_POSITION";
+    public static final  String   URI="FULL_SCREEN_URI";
+    private long mcurrentPostion ;
+    private SimpleExoPlayer mSimpleExoPlayer;
+
+    @BindView(R.id.video_full_sceen_exoplayer_view)
+    SimpleExoPlayerView mSimpleExoPlayerView;
+    @BindView(R.id.exo_full_screen)
+    ImageButton imageButtonFullScreenExit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_fullscreen_video);
-
+        ButterKnife.bind(this);
+        mcurrentPostion = getIntent().getLongExtra(CURRENT_POSITION, 0);
+        String stringUri = getIntent().getStringExtra(URI);
+        if(savedInstanceState!= null){
+           mcurrentPostion= savedInstanceState.getLong(CURRENT_POSITION);
+        }
+        hide();
+        imageButtonFullScreenExit.setImageResource(R.drawable.exo_fullscreen_exit_24dp);
+        imageButtonFullScreenExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendResultBack();
+            }
+        });
+        initialiseExoplayer(Uri.parse(stringUri));
         mVisible = true;
-      //  mControlsView = findViewById(R.id.fullscreen_content_controls);
-       // mContentView = findViewById(R.id.fullscreen_content);
+    }
+
+    private void initialiseExoplayer( Uri mediaUri) {
+        DefaultTrackSelector defaultTrackSelector = new DefaultTrackSelector();
+        LoadControl  loadControl = new DefaultLoadControl();
+        mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(this,defaultTrackSelector,loadControl);
+        mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
+        String userAgent = Util.getUserAgent(this, "BakingAppExoPlayer");
+        MediaSource mediaSource = new ExtractorMediaSource(mediaUri,
+                new DefaultDataSourceFactory(this,userAgent),
+                new DefaultExtractorsFactory(),null ,null);
+        mSimpleExoPlayer.prepare(mediaSource);
+        mSimpleExoPlayer.setPlayWhenReady(true);
 
 
-        // Set up the user interaction to manually show or hide the system UI.
-//        mContentView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                toggle();
-//            }
-//        });
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-       // findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
@@ -134,12 +172,15 @@ public class FullscreenVideoActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-        mControlsView.setVisibility(View.GONE);
-        mVisible = false;
+    }
 
-        // Schedule a runnable to remove the status and navigation bar after a delay
-        mHideHandler.removeCallbacks(mShowPart2Runnable);
-        mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        long currentPosition = mSimpleExoPlayer.getCurrentPosition();
+        outState.putLong(CURRENT_POSITION,currentPosition);
+        super.onSaveInstanceState(outState);
+
     }
 
     @SuppressLint("InlinedApi")
@@ -161,5 +202,18 @@ public class FullscreenVideoActivity extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        sendResultBack();
+    }
+
+    private void sendResultBack(){
+        Intent sendInten= new Intent();
+        sendInten.putExtra(CURRENT_POSITION,mSimpleExoPlayer.getCurrentPosition());
+        setResult(RESULT_OK,sendInten);
+        finish();
     }
 }

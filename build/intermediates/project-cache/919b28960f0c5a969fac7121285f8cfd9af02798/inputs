@@ -1,6 +1,0 @@
-COMMAND=PREDEX_LIBRARY_TO_DEX_ARCHIVE
-FILE_PATH=/Users/nestorkokoafantchao/GitHub/MyUdacityBanking/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar
-FILE_HASH=587899fbc0a2d9b6a308ef22e90e73ae2b160a2d
-DX_VERSION=1.13
-JUMBO_MODE=true
-OPTIMIZE=true

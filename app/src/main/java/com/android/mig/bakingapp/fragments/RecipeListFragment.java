@@ -36,7 +36,7 @@ public class RecipeListFragment extends Fragment
     private static final int LOADER_ID = 900;
     final private String RECIPES_ADDRESS = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
     private URL recipeURL = null;
-    public boolean isTablet;                // used to help distinguish between tablet and handset
+    public boolean isTablet;        // used to help distinguish between tablet and handset
 
     RecipesAdapter mRecipesAdapter;
     View rootView;
