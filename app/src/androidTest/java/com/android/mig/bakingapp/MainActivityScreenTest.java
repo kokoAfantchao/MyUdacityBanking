@@ -4,7 +4,10 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import com.android.mig.bakingapp.activities.MainActivity;
@@ -18,10 +21,18 @@ public class MainActivityScreenTest {
 
     public static final String INGREDIENT_TEXT_SAMPLE = "unsalted butter, melted";
     private static final String STEP_TEXT_SAMPLE = "Prep the cookie crust.";
+    private static final String RECIPE_TEXT_SAMPLE="Nutella Pie";
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+
+    @Test
+    public void recipeHasCorrectText(){
+        onView(withId(R.id.recipe_list_fragment))
+                .check(matches(MyRecyclerViewMatcher
+                        .atPositionOnView(0,withText(RECIPE_TEXT_SAMPLE),R.id.text_view_recipe_item)));
+    }
     @Test
     public void clickRecyclerViewIngredientsButton_OpensIngredientActivity(){
         // clicks on button "Ingredients" within the RecyclerView item at position 0
@@ -49,4 +60,6 @@ public class MainActivityScreenTest {
         // checks if list of recipes contains 4 items
         onView(withId(R.id.recipe_list_fragment)).check(matches(MyRecyclerViewMatcher.hasNumberOfItems(4)));
     }
+
+
 }

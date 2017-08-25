@@ -18,13 +18,17 @@ import com.android.mig.bakingapp.adapters.StepsAdapter;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class StepListFragment extends Fragment {
 
     StepsAdapter mStepsAdapter;
     View rootView;
     private boolean isTablet;
-
+    @BindView(R.id.recipes_recycler_view)
+    RecyclerView recyclerView;
     public StepListFragment(){
 
     }
@@ -33,7 +37,7 @@ public class StepListFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_recipe_list, container, false);
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recipes_recycler_view);
+        ButterKnife.bind(this,rootView);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);

@@ -7,7 +7,9 @@ import android.view.View;
 import org.hamcrest.Matcher;
 
 public class MyViewAction {
+
     public static ViewAction clickChildViewWithId(final int id) {
+
         return new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {

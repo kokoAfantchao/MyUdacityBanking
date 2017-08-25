@@ -28,6 +28,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.android.mig.bakingapp.utils.OpenRecipesJsonUtils.*;
 
 public class RecipeListFragment extends Fragment
@@ -40,6 +43,8 @@ public class RecipeListFragment extends Fragment
 
     RecipesAdapter mRecipesAdapter;
     View rootView;
+    @BindView(R.id.recipes_recycler_view)
+    RecyclerView recipesRecyclerView;
 
     public RecipeListFragment(){
         try {
@@ -53,7 +58,7 @@ public class RecipeListFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_recipe_list, container, false);
-        RecyclerView recipesRecyclerView = (RecyclerView) rootView.findViewById(R.id.recipes_recycler_view);
+        ButterKnife.bind(this,rootView);
 
         // sets the number of columns in recipe list according to the screen configuration
         int orientation = getResources().getConfiguration().orientation;
