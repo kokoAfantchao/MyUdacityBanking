@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.android.mig.bakingapp.R;
 import com.android.mig.bakingapp.activities.FullscreenVideoActivity;
+import com.android.mig.bakingapp.customviews.NextPreviousIndicator;
 import com.android.mig.bakingapp.models.Step;
 import com.android.mig.bakingapp.adapters.StepDetailPagerAdapter;
 import com.bumptech.glide.Glide;
@@ -56,6 +57,8 @@ public class StepDetailFragment extends Fragment  {
     private boolean isTabletFlag = false;// true if device is a tablet, false if it's a handset
     @BindView(R.id.viewpager_step_detail)
     ViewPager mViewPager;
+    @BindView(R.id.next_previous_indicator)
+    NextPreviousIndicator mNextPreviousIndicator;
     private static int mCurrentViewPagerPosition;
     View rootView;
     ArrayList<Step> mStepArrayList;
@@ -87,23 +90,24 @@ public class StepDetailFragment extends Fragment  {
             ArrayList<Step> stepArrayList = arguments.getParcelableArrayList(STEP_LIST);
             setStepsData(stepArrayList,
                     arguments.getInt(INITIAL_POSITION),
-                    arguments.getBoolean(TABLE_FLAG)
+                     arguments.getBoolean(TABLE_FLAG)
             );
         }
-        if (!isTabletFlag){
-            // retrieves the array of steps that was passed from StepListFragment
-            mStepArrayList = getActivity().getIntent().getParcelableArrayListExtra(Intent.EXTRA_TEXT);
-            mCurrentViewPagerPosition = getActivity().getIntent().getIntExtra(Intent.EXTRA_UID, STARTING_POSITION);
-        }
-
         // Create the adapter that will return a fragment for each step
         StepDetailPagerAdapter mStepDetailPagerAdapter = new StepDetailPagerAdapter(getChildFragmentManager());
         mStepDetailPagerAdapter.setStepDetailAdapter(mStepArrayList);
-
         // Set up the ViewPager with the sections adapter and displays the step that was selected
         mViewPager.setAdapter(mStepDetailPagerAdapter);
         mViewPager.setCurrentItem(mCurrentViewPagerPosition);
 
+        if (!isTabletFlag){
+            // retrieves the array of steps that was passed from StepListFragment
+            mStepArrayList = getActivity().getIntent().getParcelableArrayListExtra(Intent.EXTRA_TEXT);
+            mCurrentViewPagerPosition = getActivity().getIntent().getIntExtra(Intent.EXTRA_UID, STARTING_POSITION);
+            mStepDetailPagerAdapter.setStepDetailAdapter(mStepArrayList);
+            mNextPreviousIndicator.setVisibility(View.VISIBLE);
+            mNextPreviousIndicator.setViewPager(mViewPager,mCurrentViewPagerPosition);
+        }
         return rootView;
     }
 

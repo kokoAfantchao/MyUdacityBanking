@@ -24,6 +24,7 @@ public class StepDetailPagerAdapter extends FragmentPagerAdapter {
 
     public void setStepDetailAdapter(ArrayList<Step> stepArrayList){
         mStepArrayList = stepArrayList;
+        notifyDataSetChanged();
     }
 
     @Override

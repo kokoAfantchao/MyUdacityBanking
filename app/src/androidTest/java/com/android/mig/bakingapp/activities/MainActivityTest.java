@@ -33,36 +33,6 @@ public class MainActivityTest {
 
     @Test
     public void mainActivityTest() {
-        ViewInteraction appCompatTextView = onView(
-                allOf(withId(R.id.text_view_servings), withText("Servings: "), isDisplayed()));
-        appCompatTextView.perform(replaceText("Servings: 8"), closeSoftKeyboard());
-
-        ViewInteraction appCompatTextView2 = onView(
-                allOf(withId(R.id.text_view_servings), withText("Servings: "), isDisplayed()));
-        appCompatTextView2.perform(replaceText("Servings: 8"), closeSoftKeyboard());
-
-        ViewInteraction appCompatTextView3 = onView(
-                allOf(withId(R.id.text_view_servings), withText("Servings: "), isDisplayed()));
-        appCompatTextView3.perform(replaceText("Servings: 8"), closeSoftKeyboard());
-
-        ViewInteraction appCompatTextView4 = onView(
-                allOf(withId(R.id.text_view_servings), withText("Servings: "), isDisplayed()));
-        appCompatTextView4.perform(replaceText("Servings: 8"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.button_steps), withText("Steps"),
-                        withParent(withId(R.id.linear_layout_recipe_buttons)),
-                        isDisplayed()));
-        appCompatButton.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.step_list_fragment),
