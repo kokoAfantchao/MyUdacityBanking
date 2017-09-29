@@ -11,9 +11,14 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.android.mig.bakingapp.R;
 import com.android.mig.bakingapp.activities.IngredientActivity;
@@ -22,11 +27,14 @@ import com.android.mig.bakingapp.models.Ingredient;
 import com.android.mig.bakingapp.models.Recipe;
 import com.android.mig.bakingapp.models.Step;
 import com.android.mig.bakingapp.adapters.RecipesAdapter;
+import com.android.mig.bakingapp.services.RecipesService;
+import com.android.mig.bakingapp.utils.AppConnectivity;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,27 +45,25 @@ public class RecipeListFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<ArrayList<Recipe>>{
 
     private static final int LOADER_ID = 900;
-    final private String RECIPES_ADDRESS = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
-    private URL recipeURL = null;
+    private static final String TAG = RecipeListFragment.class.toString() ;
     public boolean isTablet;        // used to help distinguish between tablet and handset
-
     RecipesAdapter mRecipesAdapter;
-    View rootView;
     @BindView(R.id.recipes_recycler_view)
     RecyclerView recipesRecyclerView;
+    @BindView(R.id.empty_list_view)
+    LinearLayout linearLayoutEmptyView;
+    @BindView(R.id.button_reload)
+    ImageView imageButtonReload;
+
 
     public RecipeListFragment(){
-        try {
-            recipeURL = new URL(RECIPES_ADDRESS);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_recipe_list, container, false);
+        View  rootView = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         ButterKnife.bind(this,rootView);
 
         // sets the number of columns in recipe list according to the screen configuration
@@ -89,7 +95,12 @@ public class RecipeListFragment extends Fragment
             GridLayoutManager gridLayoutManager = new GridLayoutManager(rootView.getContext(), numColumns, LinearLayoutManager.VERTICAL, false);
             recipesRecyclerView.setLayoutManager(gridLayoutManager);
         }
-
+        imageButtonReload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reloadOnbuttonClick();
+            }
+        });
         mRecipesAdapter = new RecipesAdapter(new RecipesAdapter.OnClickHandler() {
             @Override
             public void OnClickIngredient(String recipe, ArrayList<Ingredient> ingredients) {
@@ -108,16 +119,18 @@ public class RecipeListFragment extends Fragment
             }
         });
         recipesRecyclerView.setAdapter(mRecipesAdapter);
-
         getLoaderManager().initLoader(LOADER_ID, null, this);
 
         return rootView;
     }
 
+    private void reloadOnbuttonClick() {
+        getLoaderManager().restartLoader(LOADER_ID,null,this);
+    }
+
     @Override
     public Loader<ArrayList<Recipe>> onCreateLoader(int id, Bundle args) {
-        return new AsyncTaskLoader<ArrayList<Recipe>>(rootView.getContext()) {
-
+        return new AsyncTaskLoader<ArrayList<Recipe>>(getContext()) {
             ArrayList<Recipe> recipesArray = null;
 
             @Override
@@ -130,13 +143,16 @@ public class RecipeListFragment extends Fragment
 
             @Override
             public ArrayList<Recipe> loadInBackground() {
-
                 ArrayList<Recipe> resultArray = null;
                 // retrieves recipes from the json url provided and passes to the adapter
                 try {
-                    String jsonResult = getResponseFromHttpUrl(recipeURL);
-                    resultArray = getRecipeArrayFromJson(jsonResult);
-
+                    if(AppConnectivity.isOnline(getContext())) {
+                        List<Recipe> recipesFromUrl = RecipesService.getRecipesFromUrl();
+                        resultArray = (ArrayList<Recipe>) recipesFromUrl;
+                        Log.d(TAG, recipesFromUrl.toString());
+                    }else {
+                        return null;
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -155,11 +171,17 @@ public class RecipeListFragment extends Fragment
     public void onLoadFinished(Loader<ArrayList<Recipe>> loader, ArrayList<Recipe> data) {
         if (data != null){
             mRecipesAdapter.setRecipesAdapter(data);
+            linearLayoutEmptyView.setVisibility(View.GONE);
+            recipesRecyclerView.setVisibility(View.VISIBLE);
+        }else {
+            linearLayoutEmptyView.setVisibility(View.VISIBLE);
+            recipesRecyclerView.setVisibility(View.GONE);
+            Toast.makeText(getContext(),R.string.app_message_empty_list,Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public void onLoaderReset(Loader<ArrayList<Recipe>> loader) {
-
+       mRecipesAdapter.setRecipesAdapter(null);
     }
 }

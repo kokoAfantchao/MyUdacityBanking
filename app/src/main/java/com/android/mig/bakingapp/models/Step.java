@@ -3,11 +3,18 @@ package com.android.mig.bakingapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Step implements Parcelable{
+    @SerializedName(value = "id")
     private int mStepID;
+    @SerializedName(value = "shortDescription")
     private String mStepShortDescription;
+    @SerializedName(value = "description")
     private String mStepDescription;
+    @SerializedName(value = "videoURL")
     private String mStepVideoURL;
+    @SerializedName(value = "thumbnailURL")
     private String mStepThumbnailURL;
 
     public Step(int id, String shortDescription, String description, String videoURL, String thumbnailURL){

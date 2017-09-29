@@ -27,23 +27,18 @@ public class StepListFragment extends Fragment {
     StepsAdapter mStepsAdapter;
     View rootView;
     private boolean isTablet;
-    @BindView(R.id.recipes_recycler_view)
+    @BindView(R.id.steps_recycler_view)
     RecyclerView recyclerView;
-    public StepListFragment(){
-
-    }
+    public StepListFragment(){}
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_recipe_list, container, false);
+        rootView = inflater.inflate(R.layout.fragment_step_list, container, false);
         ButterKnife.bind(this,rootView);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-
         isTablet = getActivity().getIntent().getBooleanExtra(Intent.ACTION_CONFIGURATION_CHANGED , false);
-
         ArrayList<Step> mStepArrayList = getActivity().getIntent().getParcelableArrayListExtra(String.valueOf(R.string.action_steps));
         mStepsAdapter = new StepsAdapter();
         recyclerView.setAdapter(mStepsAdapter);

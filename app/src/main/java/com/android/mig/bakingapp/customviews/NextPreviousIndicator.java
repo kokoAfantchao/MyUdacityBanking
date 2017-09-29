@@ -35,8 +35,7 @@ public class NextPreviousIndicator extends LinearLayout implements CustomPagerIn
      LayoutInflater layoutInflater =  LayoutInflater.from(context);
      View  rootView = layoutInflater.inflate(R.layout.nexty_previous_indicator, this, true);
      ButterKnife.bind(rootView);
-
-     mNextButton.setOnClickListener(new OnClickListener() {
+        mNextButton.setOnClickListener(new OnClickListener() {
          @Override
          public void onClick(View v) {
             if((mCurrentePage+1<=mTotalPages)) {
@@ -44,7 +43,7 @@ public class NextPreviousIndicator extends LinearLayout implements CustomPagerIn
             }
          }
      });
-     previousButton.setOnClickListener(new OnClickListener() {
+        previousButton.setOnClickListener(new OnClickListener() {
           @Override
           public void onClick(View v) {
              if(mCurrentePage-1>0){

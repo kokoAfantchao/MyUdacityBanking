@@ -1,14 +1,21 @@
 package com.android.mig.bakingapp.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class Recipe {
-
+    @SerializedName(value = "id")
     private int mRecipeID;
+    @SerializedName(value = "name")
     private String mRecipeName;
+    @SerializedName(value = "ingredients")
     private ArrayList<Ingredient> mRecipeIngredient;
+    @SerializedName(value = "steps")
     private ArrayList<Step> mRecipeStep;
+    @SerializedName(value = "servings")
     private int mRecipeServings;
+    @SerializedName(value = "image")
     private String mRecipeImage;
 
     public Recipe(int id, String name, ArrayList<Ingredient> ingredients, ArrayList<Step> steps, int servings, String image){
@@ -45,4 +52,5 @@ public class Recipe {
     public ArrayList<Step> getRecipeStep(){return mRecipeStep;}
     public int getRecipeServings(){return mRecipeServings;}
     public String getRecipeImage(){return mRecipeImage;}
+
 }

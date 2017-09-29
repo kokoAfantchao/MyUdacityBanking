@@ -4,9 +4,14 @@ package com.android.mig.bakingapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Ingredient implements Parcelable{
+    @SerializedName(value = "quantity")
     private double mIngredientQuantity;
+    @SerializedName(value = "measure")
     private String mIngredientMeasure;
+    @SerializedName(value = "ingredient")
     private String mIngredient;
 
     public Ingredient(double quantity, String measure, String ingredient){

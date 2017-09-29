@@ -105,7 +105,6 @@ public class FullscreenVideoActivity extends AppCompatActivity {
     public static final  String   URI="FULL_SCREEN_URI";
     private long mcurrentPostion ;
     private SimpleExoPlayer mSimpleExoPlayer;
-
     @BindView(R.id.video_full_sceen_exoplayer_view)
     SimpleExoPlayerView mSimpleExoPlayerView;
     @BindView(R.id.exo_full_screen)
@@ -213,6 +212,6 @@ public class FullscreenVideoActivity extends AppCompatActivity {
         Intent sendInten= new Intent();
         sendInten.putExtra(CURRENT_POSITION,mSimpleExoPlayer.getCurrentPosition());
         setResult(RESULT_OK,sendInten);
-        finish();
+      finish();
     }
 }

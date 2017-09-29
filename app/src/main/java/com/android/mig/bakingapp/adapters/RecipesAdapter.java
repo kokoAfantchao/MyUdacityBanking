@@ -1,6 +1,7 @@
 package com.android.mig.bakingapp.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +52,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
         int servings = recipe.getRecipeServings();
         holder.mTextViewRecipe.setText(recipeName);
         holder.mTextViewServings.append(String.valueOf(servings));
-        if(!recipeImage.isEmpty()&& recipeImage!= null) {
+        if(!TextUtils.isEmpty(recipeImage)) {
             Picasso.with(holder.itemView.getContext()).load(recipeImage)
                     .error(R.drawable.pie).into(holder.mImageViewRecip);
         }

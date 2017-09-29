@@ -18,6 +18,7 @@ import com.android.mig.bakingapp.activities.StepActivity;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,38 +42,28 @@ public class StepActivityBasicTest {
     @Rule
     public ActivityTestRule<StepActivity> mActivityTestRule = new ActivityTestRule<>(StepActivity.class);
 
+    @Before
+    public void init(){
+        mActivityTestRule.getActivity().getSupportFragmentManager().beginTransaction();
+
+    }
     @Test
     public void stepActivityBasicTest() {
-
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.text_view_step_description), withText("Recipe Introduction"),
+        ViewInteraction textView3 = onView(allOf(withId(R.id.text_view_step_description),withText("Recipe Introduction"),
                         childAtPosition(
                                 withParent(withId(R.id.viewpager_step_detail)),
                                 1),
                         isDisplayed()));
-      ImageButton imageButton=(ImageButton) mActivityTestRule.getActivity().findViewById(R.id.exo_full_screen);
-
-
         ViewInteraction viewInteraction = onView(withId(R.id.step_detail_container));
-
-
-
-//        ViewInteraction appCompatImageButton = onView(
-//                allOf(withId(R.id.exo_full_screen), withContentDescription("Full screen"), isDisplayed()));
-//        appCompatImageButton.perform(click());
-
-
     }
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
-
         return new TypeSafeMatcher<View>() {
             @Override
             public void describeTo(Description description) {
                 description.appendText("Child at position " + position + " in parent ");
                 parentMatcher.describeTo(description);
-
             }
 
             @Override

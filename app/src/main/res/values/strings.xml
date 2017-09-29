@@ -12,6 +12,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="indicator_next">Next</string>
     <string name="indicator_previous">Previous</string>
+    <string name="app_message_empty_list">No Recipe available  tap screen to relaod</string>
 
 
 </resources>

@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.android.mig.bakingapp.customviews.NextPreviousIndicator;
 import com.android.mig.bakingapp.models.Step;
 import com.android.mig.bakingapp.adapters.StepDetailPagerAdapter;
 import com.bumptech.glide.Glide;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -63,11 +65,7 @@ public class StepDetailFragment extends Fragment  {
     View rootView;
     ArrayList<Step> mStepArrayList;
 
-
-
-    public StepDetailFragment(){
-
-    }
+    public StepDetailFragment(){}
 
     public static  StepDetailFragment newtInstance(ArrayList<Step> steps,int initialPosition, Boolean tableFlag ){
         StepDetailFragment f = new StepDetailFragment();
@@ -84,7 +82,6 @@ public class StepDetailFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_step_detail, container, false);
         ButterKnife.bind(this,rootView);
-
         Bundle arguments = getArguments();
         if (arguments!=null) {
             ArrayList<Step> stepArrayList = arguments.getParcelableArrayList(STEP_LIST);
@@ -99,7 +96,6 @@ public class StepDetailFragment extends Fragment  {
         // Set up the ViewPager with the sections adapter and displays the step that was selected
         mViewPager.setAdapter(mStepDetailPagerAdapter);
         mViewPager.setCurrentItem(mCurrentViewPagerPosition);
-
         if (!isTabletFlag){
             // retrieves the array of steps that was passed from StepListFragment
             mStepArrayList = getActivity().getIntent().getParcelableArrayListExtra(Intent.EXTRA_TEXT);
@@ -139,7 +135,6 @@ public class StepDetailFragment extends Fragment  {
      * This fragment just holds the view that goes inside the ViewPager
      */
     public static class ViewPagerSubFragment extends Fragment{
-
         private static final String ARG_STEP_DESCRIPTION = "step_description";
         private static final String ARG_STEP_VIDEO_URL = "videoURL";
         private static final String ARG_STEP_THUMBNAIL_URL = "thumbnailURL";
@@ -147,7 +142,6 @@ public class StepDetailFragment extends Fragment  {
         private static final String TAG = ViewPagerSubFragment.class.getSimpleName();
         private static final int CURRENT_POSITION_REQUESTCODE =19 ;
         private SimpleExoPlayer mSimpleExoPlayer;
-
         @BindView(R.id.video_step_detail_exoplayer_view)
         SimpleExoPlayerView mSimpleExoPlayerView;
         @BindView(R.id.text_view_step_description)
@@ -158,15 +152,19 @@ public class StepDetailFragment extends Fragment  {
         ImageView thumbnailImageView;
         private MediaSessionCompat mMediaSession;
         private PlaybackStateCompat.Builder mStateBuilder;
+        private long resumePosition;
+        private int resumeWindow;
+        private String videoURL = null;
+        private int  stepNumber ;
 
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View subView = inflater.inflate(R.layout.fragment_step_detail_slide_page, container, false);
             ButterKnife.bind(this,subView);
-            final String videoURL = getArguments().getString(ARG_STEP_VIDEO_URL);
+             videoURL = getArguments().getString(ARG_STEP_VIDEO_URL);
             String thumbnailURL = getArguments().getString(ARG_STEP_THUMBNAIL_URL);
-            int stepNumber = getArguments().getInt(ARG_STEP_NUMBER);
+             stepNumber = getArguments().getInt(ARG_STEP_NUMBER);
             textView.setText(getArguments().getString(ARG_STEP_DESCRIPTION));
             buttonFullScreen.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -179,19 +177,19 @@ public class StepDetailFragment extends Fragment  {
                     }
                 });
             // this tries to set the player with a video, but there isn't uses an image
-            if ("".equals(videoURL) || videoURL == null) {
+            if (TextUtils.isEmpty(videoURL)) {
                 mSimpleExoPlayerView.setVisibility(View.INVISIBLE);
                 thumbnailImageView.setVisibility(View.VISIBLE);
-                if ("".equals(thumbnailURL) || thumbnailURL == null) {
+                if (TextUtils.isEmpty(thumbnailURL)) {
                     return subView;
                 } else {
                     Glide.with(this).load(thumbnailURL).into(thumbnailImageView);
                 }
             } else {
-                initializePlayer(Uri.parse(videoURL), stepNumber);
+                clearResumePosition();
+                initializePlayer();
             }
-
-            return subView;
+             return subView;
         }
 
         /**
@@ -208,8 +206,30 @@ public class StepDetailFragment extends Fragment  {
             super.onStop();
         }
 
-        /**
-         * Returns a new instance of this fragment with the corresponding step description to be displayed
+        @Override
+        public void onPause() {
+            super.onPause();
+            updateResumePosition();
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+        }
+         private void updateResumePosition() {
+             if(mSimpleExoPlayer!= null) {
+                 resumeWindow = mSimpleExoPlayer.getCurrentWindowIndex();
+                 resumePosition = Math.max(0, mSimpleExoPlayer.getCurrentPosition());
+
+             }
+         }
+         private void clearResumePosition() {
+             resumeWindow = C.INDEX_UNSET;
+             resumePosition = C.TIME_UNSET;
+           }
+
+             /**
+          * Returns a new instance of this fragment with the corresponding step description to be displayed
          */
         public static ViewPagerSubFragment newInstance(Step step, int stepNumber) {
             ViewPagerSubFragment fragment = new ViewPagerSubFragment();
@@ -217,29 +237,29 @@ public class StepDetailFragment extends Fragment  {
             args.putString(ARG_STEP_DESCRIPTION, step.getStepDescription());
             args.putString(ARG_STEP_VIDEO_URL, step.getStepVideoURL());
             args.putInt(ARG_STEP_NUMBER, stepNumber);
+            args.putString(ARG_STEP_THUMBNAIL_URL,step.getStepThumbnailURL());
             fragment.setArguments(args);
             return fragment;
         }
 
-        /**
-         * Creates and prepares the exoplayer
-         *
-         * @param videoUri a URI that contains the media file
-         * @param stepNumber value that represent the step number
-         */
-        public void initializePlayer(Uri videoUri, int stepNumber){
+        public void initializePlayer(){
             TrackSelector trackSelector = new DefaultTrackSelector();
             LoadControl loadControl = new DefaultLoadControl();
+            boolean haveResumePosition = resumeWindow != C.INDEX_UNSET;
             mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
             mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
             String userAgent = Util.getUserAgent(getActivity(), "BakingAppExoPlayer");
-            MediaSource mediaSource = new ExtractorMediaSource(videoUri, new DefaultDataSourceFactory(
+            MediaSource mediaSource = new ExtractorMediaSource(Uri.parse(videoURL), new DefaultDataSourceFactory(
                     getActivity(), userAgent), new DefaultExtractorsFactory(), null, null);
-            mSimpleExoPlayer.prepare(mediaSource);
+            mSimpleExoPlayer.prepare(mediaSource,!haveResumePosition,false);
             // this prevents the video to be played in previous and next page while they're not visible
             if (mCurrentViewPagerPosition == stepNumber){
                 mSimpleExoPlayer.setPlayWhenReady(true);
             }
+            if(haveResumePosition){
+                mSimpleExoPlayer.seekTo(resumeWindow,resumePosition);
+            }
+
         }
 
 
@@ -247,8 +267,7 @@ public class StepDetailFragment extends Fragment  {
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
             if(requestCode==CURRENT_POSITION_REQUESTCODE){
-                long longExtra = data.getLongExtra(FullscreenVideoActivity.CURRENT_POSITION, 0);
-                mSimpleExoPlayer.seekTo(longExtra);
+                resumePosition  = data.getLongExtra(FullscreenVideoActivity.CURRENT_POSITION, 0);
             }
         }
     }
