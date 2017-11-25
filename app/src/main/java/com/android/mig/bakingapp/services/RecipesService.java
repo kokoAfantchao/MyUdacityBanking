@@ -1,7 +1,9 @@
 package com.android.mig.bakingapp.services;
 
 import android.opengl.EGL14;
+import android.os.Build;
 
+import com.android.mig.bakingapp.BuildConfig;
 import com.android.mig.bakingapp.models.Recipe;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,8 +24,7 @@ import okhttp3.Response;
 
 public class RecipesService {
 
-    final private static String RECIPES_ADDRESS
-            = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
+    final private static String RECIPES_ADDRESS = BuildConfig.BANKING_API_URL;
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
     private static OkHttpClient client = new OkHttpClient();

@@ -9,6 +9,7 @@ import android.widget.RemoteViews;
 /**
  * Implementation of App Widget functionality.
  */
+
 public class RecipeWidget extends AppWidgetProvider {
 
     public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId, String recipeName) {
@@ -17,12 +18,11 @@ public class RecipeWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
         views.setRemoteAdapter(R.id.widget_recipe_list, new Intent(context, WidgetService.class));
         views.setTextViewText(R.id.last_viewed_ingredients, recipeName);
-
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-    public static void updateRecipeWidget(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, String recipeName){
+    public static void updateRecipeWidget(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, String recipeName) {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId, recipeName);
         }

@@ -39,7 +39,7 @@ public class StepListFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         isTablet = getActivity().getIntent().getBooleanExtra(Intent.ACTION_CONFIGURATION_CHANGED , false);
-        ArrayList<Step> mStepArrayList = getActivity().getIntent().getParcelableArrayListExtra(String.valueOf(R.string.action_steps));
+        ArrayList<Step> mStepArrayList = getActivity().getIntent().getParcelableArrayListExtra(getString(R.string.action_steps));
         mStepsAdapter = new StepsAdapter();
         recyclerView.setAdapter(mStepsAdapter);
         mStepsAdapter.setStepsAdapter(mStepArrayList, new StepsAdapter.OnClickHandler() {

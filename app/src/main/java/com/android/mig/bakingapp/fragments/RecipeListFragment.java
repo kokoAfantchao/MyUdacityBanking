@@ -105,7 +105,7 @@ public class RecipeListFragment extends Fragment
             @Override
             public void OnClickIngredient(String recipe, ArrayList<Ingredient> ingredients) {
                 Intent intent = new Intent(getActivity(), IngredientActivity.class);
-                intent.putExtra(String.valueOf(R.string.action_ingredients), ingredients);
+                intent.putExtra(getString(R.string.action_ingredients), ingredients);
                 intent.putExtra(Intent.EXTRA_TEXT, recipe);
                 startActivity(intent);
             }
@@ -113,7 +113,7 @@ public class RecipeListFragment extends Fragment
             @Override
             public void OnClickStep(ArrayList<Step> steps) {
                 Intent intent = new Intent(getActivity(), StepActivity.class);
-                intent.putExtra(String.valueOf(R.string.action_steps), steps);
+                intent.putExtra(getString(R.string.action_steps), steps);
                 intent.putExtra(Intent.ACTION_CONFIGURATION_CHANGED, isTablet);
                 startActivity(intent);
             }

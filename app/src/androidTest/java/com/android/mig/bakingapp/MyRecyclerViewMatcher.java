@@ -31,6 +31,7 @@ public class MyRecyclerViewMatcher {
         };
     }
 
+
     public static Matcher<View> hasNumberOfItems(final int numItems) {
         return new TypeSafeMatcher<View>() {
 

@@ -25,7 +25,7 @@
             <TextView
                 android:id="@+id/last_viewed_ingredients"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:laZyout_height="wrap_content"
                 android:text="@string/last_viewed_ingredients"
                 android:layout_gravity="center_vertical"
                 android:textColor="@android:color/black"
