@@ -122,7 +122,7 @@ public class RecipeListFragment extends Fragment
         getLoaderManager().initLoader(LOADER_ID, null, this);
 
         return rootView;
-    }
+        }
 
     private void reloadOnbuttonClick() {
         getLoaderManager().restartLoader(LOADER_ID,null,this);

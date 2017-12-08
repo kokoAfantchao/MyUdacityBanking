@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.android.mig.bakingapp"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -17,10 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildTypes.each {
-        it.buildConfigField 'String', 'BANKING_API_URL', MyBankingDataUrl
+//    buildTypes.each {
+//        it.buildConfigField 'String', 'BANKING_API_URL', MyBankingDataUrl
+//    }
     }
-}
 
 ext {
     supportLibVersion = '25.4.0'

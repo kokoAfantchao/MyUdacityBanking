@@ -24,7 +24,7 @@ import okhttp3.Response;
 
 public class RecipesService {
 
-    final private static String RECIPES_ADDRESS = BuildConfig.BANKING_API_URL;
+    final private static String RECIPES_ADDRESS = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
     private static OkHttpClient client = new OkHttpClient();

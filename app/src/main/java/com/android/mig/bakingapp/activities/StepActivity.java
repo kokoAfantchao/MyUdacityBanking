@@ -20,11 +20,10 @@ public class StepActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step);
-
         // if it's a tablet and it's on landscape mode then add a StepDetailFragment as a static
         // instance to able to handle it from this activity
         if (getResources().getConfiguration().smallestScreenWidthDp >= 600){
-            ArrayList<Step> stepArrayList = getIntent().getParcelableArrayListExtra(String.valueOf(R.string.action_steps));
+            ArrayList<Step> stepArrayList = getIntent().getParcelableArrayListExtra(getString(R.string.action_steps));
             FragmentManager fragmentManager = getSupportFragmentManager();
             sStepDetailInstance = StepDetailFragment.newtInstance(stepArrayList,INITIAL_POSITION, TABLET_FLAG);
             fragmentManager.beginTransaction()
