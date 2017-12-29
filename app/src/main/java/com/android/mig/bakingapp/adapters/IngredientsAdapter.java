@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.IngredientsAdapterViewHolder>{
+public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.IngredientsAdapterViewHolder> {
 
     ArrayList<Ingredient> mIngredientArray;
 
-    public IngredientsAdapter(){
+    public IngredientsAdapter() {
         mIngredientArray = new ArrayList<Ingredient>();
     }
 
-    public void setIngredientAdapter(ArrayList<Ingredient> ingredientArray){
+    public void setIngredientAdapter(ArrayList<Ingredient> ingredientArray) {
         mIngredientArray = ingredientArray;
         notifyDataSetChanged();
     }
@@ -54,12 +54,14 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     public class IngredientsAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.text_view_ingredient) TextView mTextViewIngredient;
-        @BindView(R.id.text_view_quantity_measure) TextView mTextViewQuantityMeasure;
+        @BindView(R.id.text_view_ingredient)
+        TextView mTextViewIngredient;
+        @BindView(R.id.text_view_quantity_measure)
+        TextView mTextViewQuantityMeasure;
 
         public IngredientsAdapterViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

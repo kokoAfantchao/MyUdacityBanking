@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -23,29 +22,25 @@ import android.widget.Toast;
 import com.android.mig.bakingapp.R;
 import com.android.mig.bakingapp.activities.IngredientActivity;
 import com.android.mig.bakingapp.activities.StepActivity;
+import com.android.mig.bakingapp.adapters.RecipesAdapter;
 import com.android.mig.bakingapp.models.Ingredient;
 import com.android.mig.bakingapp.models.Recipe;
 import com.android.mig.bakingapp.models.Step;
-import com.android.mig.bakingapp.adapters.RecipesAdapter;
 import com.android.mig.bakingapp.services.RecipesService;
 import com.android.mig.bakingapp.utils.AppConnectivity;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.android.mig.bakingapp.utils.OpenRecipesJsonUtils.*;
-
 public class RecipeListFragment extends Fragment
-        implements LoaderManager.LoaderCallbacks<ArrayList<Recipe>>{
+        implements LoaderManager.LoaderCallbacks<ArrayList<Recipe>> {
 
     private static final int LOADER_ID = 900;
-    private static final String TAG = RecipeListFragment.class.toString() ;
+    private static final String TAG = RecipeListFragment.class.toString();
     public boolean isTablet;        // used to help distinguish between tablet and handset
     RecipesAdapter mRecipesAdapter;
     @BindView(R.id.recipes_recycler_view)
@@ -56,23 +51,23 @@ public class RecipeListFragment extends Fragment
     ImageView imageButtonReload;
 
 
-    public RecipeListFragment(){
+    public RecipeListFragment() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View  rootView = inflater.inflate(R.layout.fragment_recipe_list, container, false);
-        ButterKnife.bind(this,rootView);
+        View rootView = inflater.inflate(R.layout.fragment_recipe_list, container, false);
+        ButterKnife.bind(this, rootView);
 
         // sets the number of columns in recipe list according to the screen configuration
         int orientation = getResources().getConfiguration().orientation;
         int smallestWidth = getResources().getConfiguration().smallestScreenWidthDp;
         // if it's a handset
-        if (smallestWidth < getResources().getInteger(R.integer.sw600dp)){
+        if (smallestWidth < getResources().getInteger(R.integer.sw600dp)) {
             isTablet = false;
-            if (orientation == Configuration.ORIENTATION_PORTRAIT){
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
                 recipesRecyclerView.setLayoutManager(linearLayoutManager);
             } else {
@@ -83,11 +78,11 @@ public class RecipeListFragment extends Fragment
                         false);
                 recipesRecyclerView.setLayoutManager(gridLayoutManager);
             }
-        // if it's a tablet
+            // if it's a tablet
         } else {
             isTablet = true;
             int numColumns;
-            if (orientation == Configuration.ORIENTATION_PORTRAIT){
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                 numColumns = getResources().getInteger(R.integer.portrait_tablet_recipes_list_num_columns);
             } else {
                 numColumns = getResources().getInteger(R.integer.landscape_tablet_recipes_list_num_columns);
@@ -122,10 +117,10 @@ public class RecipeListFragment extends Fragment
         getLoaderManager().initLoader(LOADER_ID, null, this);
 
         return rootView;
-        }
+    }
 
     private void reloadOnbuttonClick() {
-        getLoaderManager().restartLoader(LOADER_ID,null,this);
+        getLoaderManager().restartLoader(LOADER_ID, null, this);
     }
 
     @Override
@@ -135,10 +130,10 @@ public class RecipeListFragment extends Fragment
 
             @Override
             protected void onStartLoading() {
-                if(recipesArray!=null )
+                if (recipesArray != null)
                     deliverResult(recipesArray);
                 else
-                forceLoad();
+                    forceLoad();
             }
 
             @Override
@@ -146,11 +141,11 @@ public class RecipeListFragment extends Fragment
                 ArrayList<Recipe> resultArray = null;
                 // retrieves recipes from the json url provided and passes to the adapter
                 try {
-                    if(AppConnectivity.isOnline(getContext())) {
+                    if (AppConnectivity.isOnline(getContext())) {
                         List<Recipe> recipesFromUrl = RecipesService.getRecipesFromUrl();
                         resultArray = (ArrayList<Recipe>) recipesFromUrl;
                         Log.d(TAG, recipesFromUrl.toString());
-                    }else {
+                    } else {
                         return null;
                     }
                 } catch (IOException e) {
@@ -169,19 +164,19 @@ public class RecipeListFragment extends Fragment
 
     @Override
     public void onLoadFinished(Loader<ArrayList<Recipe>> loader, ArrayList<Recipe> data) {
-        if (data != null){
+        if (data != null) {
             mRecipesAdapter.setRecipesAdapter(data);
             linearLayoutEmptyView.setVisibility(View.GONE);
             recipesRecyclerView.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             linearLayoutEmptyView.setVisibility(View.VISIBLE);
             recipesRecyclerView.setVisibility(View.GONE);
-            Toast.makeText(getContext(),R.string.app_message_empty_list,Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.app_message_empty_list, Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public void onLoaderReset(Loader<ArrayList<Recipe>> loader) {
-       mRecipesAdapter.setRecipesAdapter(null);
+        mRecipesAdapter.setRecipesAdapter(null);
     }
 }

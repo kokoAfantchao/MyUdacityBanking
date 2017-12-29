@@ -55,15 +55,15 @@ public class OpenRecipesJsonUtils {
         final String RECIPE_ID = "id";
         final String RECIPE_NAME = "name";
         final String RECIPE_INGREDIENTS_ARRAY = "ingredients";
-            final String INGREDIENT_QUANTITY = "quantity";
-            final String INGREDIENT_MEASURE = "measure";
-            final String INGREDIENT = "ingredient";
+        final String INGREDIENT_QUANTITY = "quantity";
+        final String INGREDIENT_MEASURE = "measure";
+        final String INGREDIENT = "ingredient";
         final String RECIPE_STEPS_ARRAY = "steps";
-            final String STEP_ID = "id";
-            final String STEP_SHORT_DESCRIPTION = "shortDescription";
-            final String STEP_DESCRIPTION = "description";
-            final String STEP_VIDEO_URL = "videoURL";
-            final String STEP_THUMBNAIL_URL = "thumbnailURL";
+        final String STEP_ID = "id";
+        final String STEP_SHORT_DESCRIPTION = "shortDescription";
+        final String STEP_DESCRIPTION = "description";
+        final String STEP_VIDEO_URL = "videoURL";
+        final String STEP_THUMBNAIL_URL = "thumbnailURL";
         final String RECIPE_SERVINGS = "servings";
         final String RECIPE_IMAGE = "image";
 
@@ -73,7 +73,7 @@ public class OpenRecipesJsonUtils {
         try {
             JSONArray recipesJsonArray = new JSONArray(recipesJsonResponse);
 
-            for (int i = 0; i < recipesJsonArray.length(); i++){
+            for (int i = 0; i < recipesJsonArray.length(); i++) {
 
                 Ingredient mIngredientObject = null;
                 Step mStepObject = null;
@@ -87,7 +87,7 @@ public class OpenRecipesJsonUtils {
                 // retrieves ingredients array from json file and save its data into an object
                 JSONArray ingredientsJsonArray = resultJsonObject.getJSONArray(RECIPE_INGREDIENTS_ARRAY);
                 ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
-                for (int x = 0; x < ingredientsJsonArray.length(); x++){
+                for (int x = 0; x < ingredientsJsonArray.length(); x++) {
                     JSONObject ingredientJsonObject = ingredientsJsonArray.getJSONObject(x);
                     double quantity = ingredientJsonObject.getDouble(INGREDIENT_QUANTITY);
                     String measure = ingredientJsonObject.getString(INGREDIENT_MEASURE);
@@ -99,7 +99,7 @@ public class OpenRecipesJsonUtils {
                 // retrieves steps array from json file and save its data into an object
                 JSONArray stepsJsonArray = resultJsonObject.getJSONArray(RECIPE_STEPS_ARRAY);
                 ArrayList<Step> stepsArrayList = new ArrayList<>();
-                for (int y = 0; y < stepsJsonArray.length(); y++){
+                for (int y = 0; y < stepsJsonArray.length(); y++) {
                     JSONObject stepJsonObject = stepsJsonArray.getJSONObject(y);
                     int stepID = stepJsonObject.getInt(STEP_ID);
                     String shortDescription = stepJsonObject.getString(STEP_SHORT_DESCRIPTION);

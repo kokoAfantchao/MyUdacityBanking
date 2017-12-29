@@ -13,15 +13,12 @@ import com.android.mig.bakingapp.utils.AppConnectivity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import static com.android.mig.bakingapp.utils.Preferences.PREFERENCE_FILE_KEY;
 
 public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory {
 
 
-     private List<Ingredient> mCollection = new ArrayList<Ingredient>();
-     private Context mContext;
+    private List<Ingredient> mCollection = new ArrayList<Ingredient>();
+    private Context mContext;
 
     public WidgetDataProvider(Context mContext) {
         this.mContext = mContext;
@@ -34,7 +31,6 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     // called when RemoteViewsFactory is first created and when notifyWidgetViewDataChanged is called
     @Override
     public void onDataSetChanged() {
-
         getCollection();
     }
 
@@ -69,6 +65,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     public long getItemId(int position) {
         return position;
     }
+
     // true if items in list won't change
     @Override
     public boolean hasStableIds() {
@@ -77,12 +74,12 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     public void getCollection() {
         mCollection.clear();
-        if(AppConnectivity.isOnline(mContext)){
+        if (AppConnectivity.isOnline(mContext)) {
             try {
                 List<Recipe> recipesFromUrl = RecipesService.getRecipesFromUrl();
-                if (recipesFromUrl.size()>=1){
-                mCollection =recipesFromUrl.get(1).getRecipeIngredient();
-                    Log.d(this.getClass().getName(),mCollection.toString());
+                if (recipesFromUrl.size() >= 1) {
+                    mCollection = recipesFromUrl.get(1).getRecipeIngredient();
+                    Log.d(this.getClass().getName(), mCollection.toString());
                 }
             } catch (IOException e) {
                 e.printStackTrace();

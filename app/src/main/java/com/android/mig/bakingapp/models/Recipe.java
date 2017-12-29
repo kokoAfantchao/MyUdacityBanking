@@ -18,7 +18,7 @@ public class Recipe {
     @SerializedName(value = "image")
     private String mRecipeImage;
 
-    public Recipe(int id, String name, ArrayList<Ingredient> ingredients, ArrayList<Step> steps, int servings, String image){
+    public Recipe(int id, String name, ArrayList<Ingredient> ingredients, ArrayList<Step> steps, int servings, String image) {
         mRecipeID = id;
         mRecipeName = name;
         mRecipeIngredient = ingredients;
@@ -27,30 +27,52 @@ public class Recipe {
         mRecipeImage = image;
     }
 
-    public void setRecipeID(int id){
+    public void setRecipeID(int id) {
         mRecipeID = id;
     }
-    public void setRecipeName(String name){
+
+    public void setRecipeName(String name) {
         mRecipeName = name;
     }
-    public void setRecipeIngredient(ArrayList<Ingredient> ingredients){
+
+    public void setRecipeIngredient(ArrayList<Ingredient> ingredients) {
         mRecipeIngredient = ingredients;
     }
-    public void setRecipeStep(ArrayList<Step> steps){
+
+    public void setRecipeStep(ArrayList<Step> steps) {
         mRecipeStep = steps;
     }
-    public void setRecipeServings(int servings){
+
+    public void setRecipeServings(int servings) {
         mRecipeServings = servings;
     }
-    public void setRecipeImage(String image){
+
+    public void setRecipeImage(String image) {
         mRecipeImage = image;
     }
 
-    public int getRecipeID(){return mRecipeID;}
-    public String getRecipeName(){return mRecipeName;}
-    public ArrayList<Ingredient> getRecipeIngredient(){return mRecipeIngredient;}
-    public ArrayList<Step> getRecipeStep(){return mRecipeStep;}
-    public int getRecipeServings(){return mRecipeServings;}
-    public String getRecipeImage(){return mRecipeImage;}
+    public int getRecipeID() {
+        return mRecipeID;
+    }
+
+    public String getRecipeName() {
+        return mRecipeName;
+    }
+
+    public ArrayList<Ingredient> getRecipeIngredient() {
+        return mRecipeIngredient;
+    }
+
+    public ArrayList<Step> getRecipeStep() {
+        return mRecipeStep;
+    }
+
+    public int getRecipeServings() {
+        return mRecipeServings;
+    }
+
+    public String getRecipeImage() {
+        return mRecipeImage;
+    }
 
 }

@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Step implements Parcelable{
+public class Step implements Parcelable {
     @SerializedName(value = "id")
     private int mStepID;
     @SerializedName(value = "shortDescription")
@@ -17,7 +17,7 @@ public class Step implements Parcelable{
     @SerializedName(value = "thumbnailURL")
     private String mStepThumbnailURL;
 
-    public Step(int id, String shortDescription, String description, String videoURL, String thumbnailURL){
+    public Step(int id, String shortDescription, String description, String videoURL, String thumbnailURL) {
         mStepID = id;
         mStepShortDescription = shortDescription;
         mStepDescription = description;
@@ -45,31 +45,45 @@ public class Step implements Parcelable{
         }
     };
 
-    public void setStepID(int id){
+    public void setStepID(int id) {
         mStepID = id;
     }
 
-    public void setStepShortDescription(String shortDescription){
+    public void setStepShortDescription(String shortDescription) {
         mStepShortDescription = shortDescription;
     }
 
-    public void setStepDescription(String description){
+    public void setStepDescription(String description) {
         mStepDescription = description;
     }
 
-    public void setStepVideoURL(String videoURL){
+    public void setStepVideoURL(String videoURL) {
         mStepVideoURL = videoURL;
     }
 
-    public void setmStepThumbnailURL(String thumbnailURL){
+    public void setmStepThumbnailURL(String thumbnailURL) {
         mStepThumbnailURL = thumbnailURL;
     }
 
-    public int getStepID(){return mStepID;}
-    public String getStepShortDescription(){return mStepShortDescription;}
-    public String getStepDescription(){return mStepDescription;}
-    public String getStepVideoURL(){return mStepVideoURL;}
-    public String getStepThumbnailURL(){return mStepThumbnailURL;}
+    public int getStepID() {
+        return mStepID;
+    }
+
+    public String getStepShortDescription() {
+        return mStepShortDescription;
+    }
+
+    public String getStepDescription() {
+        return mStepDescription;
+    }
+
+    public String getStepVideoURL() {
+        return mStepVideoURL;
+    }
+
+    public String getStepThumbnailURL() {
+        return mStepThumbnailURL;
+    }
 
     @Override
     public int describeContents() {

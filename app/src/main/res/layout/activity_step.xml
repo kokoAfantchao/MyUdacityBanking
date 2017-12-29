@@ -3,5 +3,4 @@
     android:id="@+id/step_list_fragment"
     android:name="com.android.mig.bakingapp.fragments.StepListFragment"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
-</fragment>
+    android:layout_width="match_parent"></fragment>

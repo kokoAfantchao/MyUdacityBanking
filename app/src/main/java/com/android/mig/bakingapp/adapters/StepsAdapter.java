@@ -14,16 +14,16 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapterViewHolder>{
+public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapterViewHolder> {
 
     OnClickHandler mOnClickHandler;
     ArrayList<Step> mStepsArray;
 
-    public StepsAdapter(){
+    public StepsAdapter() {
         mStepsArray = new ArrayList<>();
     }
 
-    public void setStepsAdapter(ArrayList<Step> stepArray, OnClickHandler onClickHandler){
+    public void setStepsAdapter(ArrayList<Step> stepArray, OnClickHandler onClickHandler) {
         mStepsArray = stepArray;
         mOnClickHandler = onClickHandler;
         notifyDataSetChanged();
@@ -50,13 +50,14 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
         return 0;
     }
 
-    public class StepsAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class StepsAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.text_view_step) TextView mTextViewStep;
+        @BindView(R.id.text_view_step)
+        TextView mTextViewStep;
 
         public StepsAdapterViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
@@ -66,7 +67,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
         }
     }
 
-    public interface OnClickHandler{
+    public interface OnClickHandler {
         void OnClick(ArrayList<Step> stepArrayList, int position);
     }
 }

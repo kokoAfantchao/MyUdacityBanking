@@ -12,18 +12,18 @@
         android:name="com.android.mig.bakingapp.fragments.StepListFragment"
         android:layout_width="@dimen/zero_dimension"
         android:layout_height="match_parent"
-        android:layout_weight="@integer/step_list_weight"/>
+        android:layout_weight="@integer/step_list_weight" />
 
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray" />
 
     <FrameLayout
         android:id="@+id/step_detail_container"
         android:name="com.android.mig.bakingapp.fragments.StepDetailFragment"
         android:layout_width="@dimen/zero_dimension"
         android:layout_height="match_parent"
-        android:layout_weight="@integer/step_detail_weight"/>
+        android:layout_weight="@integer/step_detail_weight" />
 
 </LinearLayout>

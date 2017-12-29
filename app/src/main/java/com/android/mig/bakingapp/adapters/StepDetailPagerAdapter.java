@@ -22,7 +22,7 @@ public class StepDetailPagerAdapter extends FragmentPagerAdapter {
         mStepArrayList = new ArrayList<>();
     }
 
-    public void setStepDetailAdapter(ArrayList<Step> stepArrayList){
+    public void setStepDetailAdapter(ArrayList<Step> stepArrayList) {
         mStepArrayList = stepArrayList;
         notifyDataSetChanged();
     }

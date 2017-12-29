@@ -13,7 +13,6 @@ import android.widget.RemoteViews;
 public class RecipeWidget extends AppWidgetProvider {
 
     public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId, String recipeName) {
-
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
         views.setRemoteAdapter(R.id.widget_recipe_list, new Intent(context, WidgetService.class));

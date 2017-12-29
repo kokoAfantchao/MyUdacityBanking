@@ -20,21 +20,21 @@ public class Preferences {
     /**
      * Stores the last ingredients that were last viewed into SharedPreferences
      *
-     * @param context the activity context
-     * @param recipe the recipe name
+     * @param context             the activity context
+     * @param recipe              the recipe name
      * @param ingredientArrayList an array that contains the ingredients for one particular recipe
      */
-    public static void saveIngredientList(Context context, String recipe, ArrayList<Ingredient> ingredientArrayList){
+    public static void saveIngredientList(Context context, String recipe, ArrayList<Ingredient> ingredientArrayList) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        for (int i = 0; i < ingredientArrayList.size(); i++){
+        for (int i = 0; i < ingredientArrayList.size(); i++) {
             String ingredient = ingredientArrayList.get(i).getIngredient() + " - " +
                     ingredientArrayList.get(i).getIngredientQuantity() + " " +
                     ingredientArrayList.get(i).getIngredientMeasure();
             editor.putString(String.valueOf(i), ingredient);
         }
         editor.apply();
-        updateWidget(context , recipe);
+        updateWidget(context, recipe);
     }
 
 
@@ -43,7 +43,7 @@ public class Preferences {
      *
      * @param context the activity context
      */
-    public static void deleteAllPreferences(Context context){
+    public static void deleteAllPreferences(Context context) {
         context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE).edit().clear().apply();
     }
 
@@ -51,9 +51,9 @@ public class Preferences {
      * Notifies the RemoteViewServices that data has changed, so it can update those changes
      *
      * @param context the activity context
-     * @param recipe the recipe name
+     * @param recipe  the recipe name
      */
-    private static void updateWidget(Context context, String recipe){
+    private static void updateWidget(Context context, String recipe) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, RecipeWidget.class));
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_recipe_list);

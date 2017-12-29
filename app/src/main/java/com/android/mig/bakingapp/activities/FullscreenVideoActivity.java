@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.media.session.MediaSessionCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -12,17 +14,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.android.mig.bakingapp.R;
-import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.LoadControl;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.android.mig.bakingapp.utils.ExoPlayerVideoHandler;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,7 +77,7 @@ public class FullscreenVideoActivity extends AppCompatActivity {
     private final Runnable mHideRunnable = new Runnable() {
         @Override
         public void run() {
-           //  hide();
+            //  hide();
         }
     };
     /**
@@ -101,14 +94,17 @@ public class FullscreenVideoActivity extends AppCompatActivity {
             return false;
         }
     };
-    public static final  String   CURRENT_POSITION="CURRENT_POSITION";
-    public static final  String   URI="FULL_SCREEN_URI";
-    private long mcurrentPostion ;
-    private SimpleExoPlayer mSimpleExoPlayer;
+    public static final String CURRENT_POSITION = "CURRENT_POSITION";
+    public static final String URI = "FULL_SCREEN_URI";
+    private long mcurrentPostion;
+
     @BindView(R.id.video_full_sceen_exoplayer_view)
     SimpleExoPlayerView mSimpleExoPlayerView;
     @BindView(R.id.exo_full_screen)
     ImageButton imageButtonFullScreenExit;
+    private PlaybackStateCompat.Builder mStateBuilder;
+    private MediaSessionCompat mMediaSession;
+    private boolean destroyVideo = true;
 
 
     @Override
@@ -116,10 +112,10 @@ public class FullscreenVideoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullscreen_video);
         ButterKnife.bind(this);
-        mcurrentPostion = getIntent().getLongExtra(CURRENT_POSITION, 0);
+        // mcurrentPostion = getIntent().getLongExtra(CURRENT_POSITION, 0);
         String stringUri = getIntent().getStringExtra(URI);
-        if(savedInstanceState!= null){
-           mcurrentPostion= savedInstanceState.getLong(CURRENT_POSITION);
+        if (savedInstanceState != null) {
+            mcurrentPostion = savedInstanceState.getLong(CURRENT_POSITION);
         }
         hide();
         imageButtonFullScreenExit.setImageResource(R.drawable.exo_fullscreen_exit_24dp);
@@ -127,26 +123,16 @@ public class FullscreenVideoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendResultBack();
+
             }
         });
-        initialiseExoplayer(Uri.parse(stringUri));
+        ExoPlayerVideoHandler.getInstance()
+                .prepareExoPlayerForUri(getApplicationContext(), Uri.parse(stringUri), mSimpleExoPlayerView);
+        ExoPlayerVideoHandler.getInstance().goToForeground();
+
         mVisible = true;
     }
 
-    private void initialiseExoplayer( Uri mediaUri) {
-        DefaultTrackSelector defaultTrackSelector = new DefaultTrackSelector();
-        LoadControl  loadControl = new DefaultLoadControl();
-        mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(this,defaultTrackSelector,loadControl);
-        mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
-        String userAgent = Util.getUserAgent(this, "BakingAppExoPlayer");
-        MediaSource mediaSource = new ExtractorMediaSource(mediaUri,
-                new DefaultDataSourceFactory(this,userAgent),
-                new DefaultExtractorsFactory(),null ,null);
-        mSimpleExoPlayer.prepare(mediaSource);
-        mSimpleExoPlayer.setPlayWhenReady(true);
-
-
-    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -176,10 +162,8 @@ public class FullscreenVideoActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        long currentPosition = mSimpleExoPlayer.getCurrentPosition();
-        outState.putLong(CURRENT_POSITION,currentPosition);
+        ExoPlayerVideoHandler.getInstance().updateResumePosition();
         super.onSaveInstanceState(outState);
-
     }
 
     @SuppressLint("InlinedApi")
@@ -193,6 +177,7 @@ public class FullscreenVideoActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
+
     /**
      * Schedules a call to hide() in delay milliseconds, canceling any
      * previously scheduled calls.
@@ -205,13 +190,40 @@ public class FullscreenVideoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        destroyVideo = false;
         sendResultBack();
     }
 
-    private void sendResultBack(){
-        Intent sendInten= new Intent();
-        sendInten.putExtra(CURRENT_POSITION,mSimpleExoPlayer.getCurrentPosition());
-        setResult(RESULT_OK,sendInten);
-      finish();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (destroyVideo) {
+            ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
+        }
+
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ExoPlayerVideoHandler.getInstance().goToBackground();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ExoPlayerVideoHandler.getInstance().goToForeground();
+
+
+    }
+
+    private void sendResultBack() {
+        Intent sendInten = new Intent();
+        ExoPlayerVideoHandler.getInstance().updateResumePosition();
+        ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
+        setResult(RESULT_OK, sendInten);
+        finish();
+    }
+
+
 }

@@ -6,7 +6,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Ingredient implements Parcelable{
+public class Ingredient implements Parcelable {
     @SerializedName(value = "quantity")
     private double mIngredientQuantity;
     @SerializedName(value = "measure")
@@ -14,7 +14,7 @@ public class Ingredient implements Parcelable{
     @SerializedName(value = "ingredient")
     private String mIngredient;
 
-    public Ingredient(double quantity, String measure, String ingredient){
+    public Ingredient(double quantity, String measure, String ingredient) {
         mIngredientQuantity = quantity;
         mIngredientMeasure = measure;
         mIngredient = ingredient;
@@ -26,21 +26,29 @@ public class Ingredient implements Parcelable{
         mIngredient = in.readString();
     }
 
-    public void setIngredientQuantity(double quantity){
+    public void setIngredientQuantity(double quantity) {
         mIngredientQuantity = quantity;
     }
 
-    public void setIngredientMeasure(String measure){
+    public void setIngredientMeasure(String measure) {
         mIngredientMeasure = measure;
     }
 
-    public void setIngredient(String ingredient){
+    public void setIngredient(String ingredient) {
         mIngredient = ingredient;
     }
 
-    public double getIngredientQuantity(){return mIngredientQuantity;}
-    public String getIngredientMeasure(){return mIngredientMeasure;}
-    public String getIngredient(){return mIngredient;}
+    public double getIngredientQuantity() {
+        return mIngredientQuantity;
+    }
+
+    public String getIngredientMeasure() {
+        return mIngredientMeasure;
+    }
+
+    public String getIngredient() {
+        return mIngredient;
+    }
 
     @Override
     public int describeContents() {

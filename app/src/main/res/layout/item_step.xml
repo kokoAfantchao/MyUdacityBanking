@@ -13,7 +13,7 @@
         android:paddingTop="@dimen/recycler_view_vertical_padding"
         android:paddingBottom="@dimen/recycler_view_vertical_padding"
         android:paddingLeft="@dimen/recycler_view_horizontal_padding"
-        android:paddingRight="@dimen/recycler_view_horizontal_padding" >
+        android:paddingRight="@dimen/recycler_view_horizontal_padding">
 
     </TextView>
 

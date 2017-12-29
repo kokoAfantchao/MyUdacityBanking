@@ -9,13 +9,6 @@
     </style>
 
 
-    <style name="ExoMediaButton.FullScreen">
-        <item name="android:src">@drawable/exo_full_screen_24dp</item>
-        <item name="android:contentDescription">@string/exo_controls_full_screen_description</item>
-    </style>
-
-    <string name="exo_controls_full_screen_description">Full screen</string>
-
     <style name="FullscreenTheme" parent="AppTheme">
         <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
         <item name="android:windowActionBarOverlay">true</item>
@@ -27,6 +20,7 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+
     <style name="default_button_theme">
         <item name="android:textColor">@color/icons</item>
         <item name="android:background">@color/colorPrimary</item>

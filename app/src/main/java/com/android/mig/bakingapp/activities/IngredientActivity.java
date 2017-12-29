@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.android.mig.bakingapp.R;
 
-public class IngredientActivity extends AppCompatActivity{
+public class IngredientActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
