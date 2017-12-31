@@ -172,6 +172,7 @@ public class RecipeListFragment extends Fragment
             linearLayoutEmptyView.setVisibility(View.VISIBLE);
             recipesRecyclerView.setVisibility(View.GONE);
             Toast.makeText(getContext(), R.string.app_message_empty_list, Toast.LENGTH_LONG).show();
+
         }
     }
 

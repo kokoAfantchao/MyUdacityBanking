@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,8 +147,8 @@ public class StepDetailFragment extends Fragment {
         ImageButton buttonFullScreen;
         @BindView(R.id.thumbnail_step_detail_image_view)
         ImageView thumbnailImageView;
-        private long mResumePosition;
-        private int mResumeWindow;
+        private  long mResumePosition;
+        private  int mResumeWindow;
         private boolean mExoPlayerFullscreen = false;
         private Dialog mFullScreenDialog;
         private MediaSource mediaSource;
@@ -208,7 +209,7 @@ public class StepDetailFragment extends Fragment {
 
                 }
                 {
-                    initializePlayer();
+                   //initializePlayer();
                     initFullscreenDialog();
                 }
             }
@@ -220,10 +221,10 @@ public class StepDetailFragment extends Fragment {
                 trackSelector = new DefaultTrackSelector();
                 loadControl = new DefaultLoadControl();
                 mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
-                mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
                 String userAgent = Util.getUserAgent(getActivity(), "BakingAppExoPlayer");
                 mediaSource = new ExtractorMediaSource(Uri.parse(videoURL), new DefaultDataSourceFactory(
                         getActivity(), userAgent), new DefaultExtractorsFactory(), null, null);
+                mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
             }
 
             boolean haveResumePosition = mResumeWindow != C.INDEX_UNSET;
@@ -234,7 +235,8 @@ public class StepDetailFragment extends Fragment {
                 mSimpleExoPlayer.setPlayWhenReady(shouldAutoPlay);
             }
             if (haveResumePosition) {
-                mSimpleExoPlayer.seekTo(mResumeWindow, mResumePosition);
+                Log.d(TAG,"  current position of player "+ mResumePosition);
+                mSimpleExoPlayer.seekTo(mResumeWindow, mResumePosition+1);
             }
 
         }
@@ -293,36 +295,52 @@ public class StepDetailFragment extends Fragment {
         public void onStop() {
             super.onStop();
 
+                releasePlayer();
         }
 
         @Override
         public void onStart() {
             super.onStart();
-
+           //  initializePlayer();
         }
+
 
         @Override
         public void onPause() {
             super.onPause();
-            if (mSimpleExoPlayerView != null && mSimpleExoPlayerView.getPlayer() != null) {
-                mResumeWindow = mSimpleExoPlayerView.getPlayer().getCurrentWindowIndex();
-                mResumePosition = Math.max(0, mSimpleExoPlayerView.getPlayer().getCurrentPosition());
-
-                mSimpleExoPlayerView.getPlayer().release();
-            }
+            releasePlayer();
 
             if (mFullScreenDialog != null)
                 mFullScreenDialog.dismiss();
 
         }
 
+        private void releasePlayer() {
+            if (mSimpleExoPlayerView != null && mSimpleExoPlayerView.getPlayer() != null) {
+                mResumeWindow = mSimpleExoPlayerView.getPlayer().getCurrentWindowIndex();
+                mResumePosition = Math.max(0, mSimpleExoPlayerView.getPlayer().getCurrentPosition());
+                mSimpleExoPlayerView.getPlayer().release();
+            }
+        }
+        private void clearResumePosition() {
+            mResumeWindow = C.INDEX_UNSET;
+            mResumePosition = C.TIME_UNSET;
+        }
+
+        @Override
+        public void setUserVisibleHint(boolean isVisibleToUser) {
+            super.setUserVisibleHint(isVisibleToUser);
+            if(isVisibleToUser&& mSimpleExoPlayer!= null){
+                initializePlayer();
+            }
+        }
 
         @Override
         public void onResume() {
             super.onResume();
-            if (mSimpleExoPlayerView == null) {
 
-            }
+            initializePlayer();
+
             if (mExoPlayerFullscreen) {
                 ((ViewGroup) mSimpleExoPlayerView.getParent()).removeView(mSimpleExoPlayerView);
                 mFullScreenDialog.addContentView(mSimpleExoPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));

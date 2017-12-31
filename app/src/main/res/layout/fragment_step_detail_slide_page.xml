@@ -7,7 +7,7 @@
     tools:context=".activities.StepDetailActivity"
     android:background="@color/green100">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/media_player_frame"
         android:layout_width="@dimen/media_layout_size"
         android:layout_height="@dimen/media_layout_size"
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true" />
-    </FrameLayout>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/thumbnail_step_detail_image_view"

@@ -21,6 +21,11 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <style name="ExoMediaButton.FullScreen">
+        <item name="android:src">@drawable/exo_fullscreen_exit_24dp</item>
+        <item name="android:contentDescription">@string/exo_controls_full_description</item>
+    </style>
+
     <style name="default_button_theme">
         <item name="android:textColor">@color/icons</item>
         <item name="android:background">@color/colorPrimary</item>
@@ -29,4 +34,5 @@
     </style>
 
 
+    <string name="exo_controls_full_description">FullScreen</string>
 </resources>

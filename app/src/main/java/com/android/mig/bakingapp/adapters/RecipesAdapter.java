@@ -13,7 +13,8 @@ import com.android.mig.bakingapp.R;
 import com.android.mig.bakingapp.models.Ingredient;
 import com.android.mig.bakingapp.models.Recipe;
 import com.android.mig.bakingapp.models.Step;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+
 
 import java.util.ArrayList;
 
@@ -52,8 +53,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
         holder.mTextViewRecipe.setText(recipeName);
         holder.mTextViewServings.append(String.valueOf(servings));
         if (!TextUtils.isEmpty(recipeImage)) {
-            Picasso.with(holder.itemView.getContext()).load(recipeImage)
-                    .error(R.drawable.pie).into(holder.mImageViewRecip);
+            Glide.with(holder.itemView.getContext()).load(recipeImage).into(holder.mImageViewRecip);
+
         }
     }
 
