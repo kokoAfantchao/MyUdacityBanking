@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.mig.bakingapp.R;
@@ -266,7 +267,7 @@ public class StepDetailFragment extends Fragment {
         private void closeFullscreenDialog() {
 
             ((ViewGroup) mSimpleExoPlayerView.getParent()).removeView(mSimpleExoPlayerView);
-            ((FrameLayout) getActivity().findViewById(R.id.media_player_frame)).addView(mSimpleExoPlayerView);
+            ((LinearLayout) getActivity().findViewById(R.id.media_player_frame)).addView(mSimpleExoPlayerView);
             mExoPlayerFullscreen = false;
             mFullScreenDialog.dismiss();
 
@@ -294,8 +295,7 @@ public class StepDetailFragment extends Fragment {
         @Override
         public void onStop() {
             super.onStop();
-
-                releasePlayer();
+            releasePlayer();
         }
 
         @Override
@@ -309,6 +309,8 @@ public class StepDetailFragment extends Fragment {
         public void onPause() {
             super.onPause();
             releasePlayer();
+            Log.d(TAG, "onPause() called  mResumePosition"+  mResumePosition);
+
 
             if (mFullScreenDialog != null)
                 mFullScreenDialog.dismiss();
@@ -316,10 +318,12 @@ public class StepDetailFragment extends Fragment {
         }
 
         private void releasePlayer() {
-            if (mSimpleExoPlayerView != null && mSimpleExoPlayerView.getPlayer() != null) {
+            if (mSimpleExoPlayerView != null && mSimpleExoPlayerView.getPlayer() != null && mSimpleExoPlayer!= null ) {
                 mResumeWindow = mSimpleExoPlayerView.getPlayer().getCurrentWindowIndex();
                 mResumePosition = Math.max(0, mSimpleExoPlayerView.getPlayer().getCurrentPosition());
-                mSimpleExoPlayerView.getPlayer().release();
+                mSimpleExoPlayer.release();
+                mSimpleExoPlayer= null ;
+
             }
         }
         private void clearResumePosition() {
@@ -327,18 +331,12 @@ public class StepDetailFragment extends Fragment {
             mResumePosition = C.TIME_UNSET;
         }
 
-        @Override
-        public void setUserVisibleHint(boolean isVisibleToUser) {
-            super.setUserVisibleHint(isVisibleToUser);
-            if(isVisibleToUser&& mSimpleExoPlayer!= null){
-                initializePlayer();
-            }
-        }
+
 
         @Override
         public void onResume() {
             super.onResume();
-
+            Log.d(TAG, "onResume() called  mResumePosition "+  mResumePosition);
             initializePlayer();
 
             if (mExoPlayerFullscreen) {
